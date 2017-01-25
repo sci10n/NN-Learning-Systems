@@ -2,10 +2,15 @@
 
 
 * Overview of the data 
+	Plot the data set and analyse the different classes.
 * Explain why the down sampling of OCR data result in a more robust feature representation
+	The features become more robust as a result of the noise in the data beeing reduced (averaged out) with the resolution.
 * A short summary of how you implemented the kNN algorithm
+	Summary of matlab code
 * Explain how you handle draws in kNN
+	If a draw occur I use the class with the closes already classified data point.
 * Explain how you selected the best k for each data set using CV and the result, include the accuracy and images of your results for each data set
+	
 * A short summary of your backprop network implementation (single + multi)
 * Present the result from the backprop training and how you reached the accuracy criteria for each dataset. Motivate your choice of network for each dataset, then explain how you selected good values for the learning rate
 * Present the result, including images, of your example foa non-generalisable backprop solution. Exaplin why this example is non-generalisable
