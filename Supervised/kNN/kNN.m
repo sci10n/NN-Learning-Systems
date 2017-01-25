@@ -19,18 +19,23 @@ labelsOut  = zeros(size(X,2),1);
     for index = 1:n
         results = zeros(size(Xt,2),1);
         for index2 = 1:size(Xt,2)
-           results(index2,:) =  results(index,:) + sqrt(sum(X(:,index).^2 + Xt(:,index2).^2)); 
+            % Value for the point we want to classify
+            v1 = X(:,index);
+            % Value for the point in the training set
+            v2 = Xt(:,index2);
+           results(index2,:) = sqrt(sum((v1 - v2).^2)); 
         end
-
     % order results on distance
-    results,indexes = sort(results);
-    
-    %pick the k closest and evaluate label
+    [~,I] = sort(results);
+    indexes = I;
+    % pick the k closest and evaluate label
         % if 50 50 pick the one closest (first in result vector
-    closest_labels = zeros(numClases,1);
+    count_labels = zeros(numClasses,1);
         for i = 1:k
             class = Lt(indexes(i,:));
-            closest_labels(class,:) = closest_labels(class,:) +1
+            count_labels(class,:) = count_labels(class,:) +1;
         end
+        [~,I] = max(count_labels);
+        labelsOut(index,:) = I;
     end
 end
