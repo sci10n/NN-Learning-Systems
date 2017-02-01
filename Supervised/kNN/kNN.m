@@ -31,6 +31,7 @@ labelsOut  = zeros(size(X,2),1);
     % pick the k closest and evaluate label
         % if 50 50 pick the one closest (first in result vector
     count_labels = zeros(numClasses,1);
+    
         for i = 1:k
             class = Lt(indexes(i,:));
             count_labels(class,:) = count_labels(class,:) +1;

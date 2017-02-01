@@ -1,4 +1,4 @@
-function [ Y, L, H] = runMultiLayer( X, W, V )
+function [ Y, L ] = runMultiLayer( X, W, V )
 %RUNMULTILAYER Calculates output and labels of the net
 %   Inputs:
 %               X  - Features to be classified (matrix)
@@ -11,9 +11,10 @@ function [ Y, L, H] = runMultiLayer( X, W, V )
 
 % Calculate net output
  
- H = tanh(W*X);
- Y = V*H;
+ M = W.'*X;
+ Y = W * M;
  % Calculate classified labels
+ % Calculate classified labels (Hint, use the max() function), get the
  [~,L] = max(Y);
  L = L(:);
 
