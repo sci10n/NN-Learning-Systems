@@ -46,8 +46,8 @@ V0 = (rand(size(D,1),numHidden+1)-0.5)*0.05; % Change this, Initiate your weight
 
 %
 [W,V, trainingError, testError ] = trainMultiLayer(Xtraining,Dt{1},Xtest,Dt{2}, W0,V0,numIterations, learningRate );
-
-% Plot errors
+trainingTime = toc;
+%% Plot errors
 figure(1101)
 clf
 [mErr, mErrInd] = min(testError);
@@ -56,20 +56,25 @@ hold on
 plot(testError,'r','linewidth',1.5)
 plot(mErrInd,mErr,'bo','linewidth',1.5)
 hold off
-title('Training and Test Errors, Single Layer')
+title('Training and Test Errors, Multi-Layer')
 legend('Training Error','Test Error','Min Test Error')
 
 %% Calculate The Confusion Matrix and the Accuracy of the Evaluation Data
 % Note: you have to modify the calcConfusionMatrix() function yourselfs.
 
 [ Y, LMultiLayerTraining ] = runMultiLayer(Xtraining, W, V);
+tic
 [ Y, LMultiLayerTest ] = runMultiLayer(Xtest, W,V);
-
+classificationTime = toc/length(Xtest);
 % The confucionMatrix
-cM = calcConfusionMatrix( LMultiLayerTest, Lt{2})
+cM = calcConfusionMatrix( LMultiLayerTest, Lt{2});
 
 % The accuracy
-acc = calcAccuracy(cM)
+acc = calcAccuracy(cM);
+
+display(['Time spent training: ' num2str(trainingTime) ' sec'])
+display(['Time spent calssifying 1 feature vector: ' num2str(classificationTime) ' sec'])
+display(['Accuracy: ' num2str(acc)])
 
 %% Plot classifications
 % Note: You do not need to change this code.
