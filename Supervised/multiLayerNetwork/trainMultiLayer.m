@@ -15,7 +15,8 @@ function [Wout,Vout, trainingError, testError ] = trainMultiLayer(Xtraining,Dtra
 %                               (vector)
 %               testError - The test error for each iteration
 %                               (vector)
-
+Xtraining = Xtraining/16;
+Xtest = Xtest/16;
 % Initiate variables
 trainingError = nan(numIterations+1,1);
 testError = nan(numIterations+1,1);
@@ -33,10 +34,9 @@ testError(1) = sum(sum((Ytest - Dtest).^2))/(numTest*numClasses);
 
 for n = 1:numIterations
 [Ytraining, ~, H ] = runMultiLayer(Xtraining, Wout, Vout);
-grad_v = 2/numTraining*(Ytraining - Dtraining)*H'; %Calculate the gradient for the output layer
-grad_w = 2/numTraining*((Vout'*(Ytraining - Dtraining)).*tanhprim(Wout*Xtest))*Xtest'; %..and for the hidden layer.
 
-
+grad_v = 2/numTraining*( Ytraining - Dtraining)*(H'); %Calculate the gradient for the output layer
+grad_w = 2/numTraining*(((Vout')*(Ytraining-Dtraining)).*tanhprim(Wout*Xtraining))*(Xtraining'); %..and for the hidden layer.
 
 Wout = Wout - learningRate*grad_w; %Take the learning step.
 Vout = Vout - learningRate*grad_v; %Take the learning step.

@@ -66,3 +66,22 @@ end
 
 plot(1:8,cv_scores)
 [~,best_score] = max(cv_scores);
+
+LkNN = kNN(Xt{2}, best_score, Xt{1}, Lt{1});
+
+%% Calculate The Confusion Matrix and the Accuracy
+% Note: you have to modify the calcConfusionMatrix() function yourselfs.
+
+% The confucionMatrix
+cM = calcConfusionMatrix( LkNN, Lt{2})
+
+% The accuracy
+acc = calcAccuracy(cM)
+
+%% Plot classifications
+% Note: You do not need to change this code.
+if dataSetNr < 4
+    plotkNNResultDots(Xt{2},LkNN,k,Lt{2},Xt{1},Lt{1});
+else
+    plotResultsOCR( Xt{2}, Lt{2}, LkNN )
+end

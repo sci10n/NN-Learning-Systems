@@ -39,8 +39,8 @@ Xtest = [Xt{2};bias];
 %% Train your single layer network
 % Note: You nned to modify trainSingleLayer() in order to train the network
 
-numIterations = 8000; % Change this, Numner of iterations (Epochs)
-learningRate = 0.00020; % Change this, Your learningrate
+numIterations = 200000; % Change this, Numner of iterations (Epochs)
+learningRate = 0.00005; % Change this, Your learningrate
 
 % Set each row to a neuron and all columns as weights
 % Outputs x features + bias

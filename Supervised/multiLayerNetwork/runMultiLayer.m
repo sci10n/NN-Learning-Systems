@@ -11,10 +11,13 @@ function [ Y, L, H] = runMultiLayer( X, W, V )
 
 % Calculate net output
  
- H = tanh(W*X);
+ H = W*X;
+ H = tanh(H);
+ H(1,:) = ones(1,size(X,2));
  Y = V*H;
+
  % Calculate classified labels
- [~,L] = max(Y);
+[~, L] = max(Y);
  L = L(:);
 
 end
