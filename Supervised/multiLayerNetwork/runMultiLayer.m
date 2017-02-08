@@ -14,7 +14,7 @@ function [ Y, L, H] = runMultiLayer( X, W, V )
  H = W*X;
  H = tanh(H);
  % H = [ones(1,size(X,2)); H];
- % H(1,:) = ones(1,size(X,2));
+H(1,:) = ones(1,size(X,2));
  Y = V*H;
 
  % Calculate classified labels
