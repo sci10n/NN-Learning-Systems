@@ -177,10 +177,10 @@ Accuracy = 0.9967
 
 This data set is much more complex compared to the other three but we are still dealing with the same number of neurons. 
 
-Hidden neurons = 128
-Iterations = 16400
-learning rate =  0.01
-Accuracy = 0.96498
+Hidden neurons = 640
+Iterations = 400000
+learning rate =  0.001
+Accuracy = 0.9150
 ![Error over iterations](Supervised/multi_4_error.png "result")
 ![Resulting classification](Supervised/multi_4_test.png "result")
 
