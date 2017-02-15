@@ -29,19 +29,34 @@ colorbar
 normed_data = normalize(countrydata);
 
 eigenvalues = pca(normed_data);
+[sorted,sorted_index]= sort(eigenvalues,2,'descend')
 
+%[A,B] = sorteig(normed_data);
 figure(1103)
 clf
-hist(eigenvalues)
+bar(sorted)
 
-[sorted,sorted_index]= sort(eigenvalues,2,'descend')
 
 figure(1104)
 clf
-scatter(normed_data(sorted_index(1),:),normed_data(sorted_index(2),:), 20, countryclass)
-colorbar
+scatter(countrydata(sorted_index(1),:) * sorted(:,1),countrydata(sorted_index(2),:)* sorted(:,2), 20, countryclass,'filled')
+hold on;
+% Plot Georgia
+scatter(countrydata(sorted_index(1),41)* sorted(:,1),countrydata(sorted_index(2),41)* sorted(:,2), 20, [1 0 0],'filled')
+
+% Find outlier
+[~,A] = max(countrydata(sorted_index(1),:) * sorted(:,1));
+countries(A,:)
 
 s1 = countrydata(:,countryclass == 0);
 s2 = countrydata(:,countryclass == 2);
 w = fld(s1,s2)
+
+figure(1105)
+clf
+plot(s1'*w, 'xb');
+hold on;
+plot(s2'*w,'or');
+
+
 

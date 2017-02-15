@@ -1,5 +1,13 @@
 function w = fld(x,y)
-    mx = mean(mean(x));
-    my = mean(mean(y));
-    w = (1/(covariance(x,x) + covariance(y,y))) * (my - mx);
+
+w = [];
+n = size(x,1);
+for i = 1:n
+
+    xt = x(i,:);
+    yt = y(i,:);
+        mx = mean(xt);
+    my = mean(yt);
+    w(i,:) = (1/(covariance(xt,xt) + covariance(yt,yt))) * (my - mx);
+end
 end
