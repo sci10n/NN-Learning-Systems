@@ -1,7 +1,5 @@
 
 % Print covaraince matrix
-covariance([1,2,3,4,5,6,7],[1,2,3,4,5,6,7]);
-
 n = size(countrydata,1);
 covariance_matrix = zeros(n);
 for i = 1:n
@@ -31,28 +29,19 @@ colorbar
 normed_data = normalize(countrydata);
 
 eigenvalues = pca(normed_data);
-[sorted,sorted_index]= sort(eigenvalues,2,'descend');
-scatterplot([normed_data(sorted_index(1),:);normed_data(sorted_index(2),:)]')
 
-function y = normalize(x)
-    c = x - mean(x);
-    y = c ./ sqrt(sum(c.^2));
-end
-function var = variance(x)
-    mx = (x - mean(x)).^2;
-    var = sum(mx) / length(x);
-end
-function cov = covariance(x,y)
-    mx = x - mean(x);
-    my = y - mean(y);
-    cov = sum(mx .* my);
-    cov = cov / (length(mx)-1);
-end
-function corr = correlation(x,y)
-    corr = covariance(x,y) ./ sqrt(variance(x).*variance(y));
-end
+figure(1103)
+clf
+hist(eigenvalues)
 
-function eigenvalues = pca(x)
-    mx = (x - mean(x)) * (x - mean(x))';
-    eigenvalues = sum(mx) / length(mx-1);
-end
+[sorted,sorted_index]= sort(eigenvalues,2,'descend')
+
+figure(1104)
+clf
+scatter(normed_data(sorted_index(1),:),normed_data(sorted_index(2),:), 20, countryclass)
+colorbar
+
+s1 = countrydata(:,countryclass == 0);
+s2 = countrydata(:,countryclass == 2);
+w = fld(s1,s2)
+
